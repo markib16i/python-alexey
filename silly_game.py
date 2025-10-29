@@ -1,4 +1,4 @@
-# silly game
+# silly game by Mark and Alexey
 
 while True:
     # Player names a number
