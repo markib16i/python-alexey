@@ -1,3 +1,5 @@
+# silly game
+
 while True:
     # Player names a number
     player_number = int(input('Enter a number: '))
