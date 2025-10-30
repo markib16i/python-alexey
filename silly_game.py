@@ -1,4 +1,6 @@
+times_played = 0
 while True:
+    print("times played:",times_played)
     # Player names a number
     player_number = int(input('Enter a number: '))
     # Computer adds 6
@@ -13,6 +15,7 @@ while True:
     # If yes, continue the loop
     if player_answer == 'y':
         print("Let's play again then")
+        times_played = times_played + 1
         continue
     else:
         # If no, break the loop
