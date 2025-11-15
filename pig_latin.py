@@ -17,18 +17,32 @@ If a word starts with a vowel, just add “way” or “yay” to the end.
 """
 
 # Get user phrase as an input
-english_phrase = input("Type a word/sentence/phrase. I am going to translate it to pig latin. ")
+english_phrase = input("Type a word/sentence/phrase: ")
 
 # Separate phrase into words
 words = english_phrase.split()
 # print(words)
 
 # Translate each word to Pig Latin
-# TODO: Make a new empty list for pig words
+
+pig_words = []
 for i in words:
     # print(i)
     if i[0] in 'aeiou':
-       pig_word = i + 'yay'
-    # TODO: append the new pig word to the list of pig words
+        pig_word = i + 'yay'
+    else:
+        # TODO: Figure out the index of the first vowel
+
+        # TODO: Find the index of character "a" in the word
+        # s.index(character)
+
+
+        # TODO: Split the word by that index
+        # TODO: Construct the pig word from the parts and "ay"
+        pig_word =
+    pig_words.append(pig_word)
+
+
+ # lst.append(new_el)
 
 # Assemble words back into a phrase, print the result
