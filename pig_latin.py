@@ -21,17 +21,22 @@ english_phrase = input("Type a word/sentence/phrase: ")
 
 # Separate phrase into words
 words = english_phrase.split()
-# print(words)
 
 # Translate each word to Pig Latin
 
 pig_words = []
-for i in words:
-    # print(i)
-    if i[0] in 'aeiou':
-        pig_word = i + 'yay'
+
+
+for word in words:
+    if word[0] in 'aeiou':
+        pig_word = word + 'yay'
     else:
         # TODO: Figure out the index of the first vowel
+        for letter in word:
+            if letter in 'aeiou':
+                ...
+            else:
+                ...
 
         # TODO: Find the index of character "a" in the word
         # s.index(character)
@@ -39,7 +44,6 @@ for i in words:
 
         # TODO: Split the word by that index
         # TODO: Construct the pig word from the parts and "ay"
-        pig_word =
     pig_words.append(pig_word)
 
 
