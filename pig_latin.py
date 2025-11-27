@@ -29,21 +29,17 @@ pig_words = []
 
 for word in words:
     if word[0] in 'aeiou':
+        # Handle words that start with a vowel
         pig_word = word + 'yay'
     else:
-        # TODO: Figure out the index of the first vowel
+        # Handle words that start with a consonant
+        consonants = ""
         for letter in word:
             if letter in 'aeiou':
-                ...
+                break
             else:
-                ...
-
-        # TODO: Find the index of character "a" in the word
-        # s.index(character)
-
-
-        # TODO: Split the word by that index
-        # TODO: Construct the pig word from the parts and "ay"
+                consonants += letter
+        pig_word = word[len(consonants):] + consonants + "ay"
     pig_words.append(pig_word)
 
 
