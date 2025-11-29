@@ -42,7 +42,4 @@ for word in words:
         pig_word = word[len(consonants):] + consonants + "ay"
     pig_words.append(pig_word)
 
-
- # lst.append(new_el)
-
-# Assemble words back into a phrase, print the result
+print(' '.join(pig_words))
