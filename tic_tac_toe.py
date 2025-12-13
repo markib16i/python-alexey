@@ -28,14 +28,15 @@ for turn_number in range(1, max_turns + 1):
         print("it is computer turn")
 
     # рисуем доску
-    print('-' * (width * 4 + 1))
-    for row in board:
-        print('| ' + ' | '.join(row) + ' |')
-        print('-' * (width * 4 + 1))
+    print('     1   2   3')
+    print('   ' + '-' * (width * 4 + 1))
+    for row_number, row in enumerate(board):
+        print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
+        print('   ' + '-' * (width * 4 + 1))
     # ход игрока
     if player_turn == True:
         print("please,it is player turn")
-
+        input("where will you put your X?")
 
     # ход компьютера
     else:
