@@ -11,8 +11,8 @@ board = [
     [' ', ' ', ' '],
 ]
 width = len(board[0])
-heigth = len(board)
-max_turns = width * heigth
+height = len(board)
+max_turns = width * height
 
 # main game loop
 for turn_number in range(1, max_turns + 1):
@@ -28,7 +28,6 @@ for turn_number in range(1, max_turns + 1):
         print("it is computer turn")
 
     # рисуем доску
-
     print('-' * (width * 4 + 1))
     for row in board:
         print('| ' + ' | '.join(row) + ' |')
