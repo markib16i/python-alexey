@@ -16,32 +16,41 @@ max_turns = width * height
 
 # main game loop
 for turn_number in range(1, max_turns + 1):
-    player_turn = turn_number % 2 == 1
+    if turn_number % 2 == 1:
+        whos_turn = 'X'
+    else:
+        whos_turn = '0'
 
     # номер хода
     print("It is turn №", turn_number)
 
     # чей ход
-    if player_turn == True:
-        print("it is player turn")
-    else:
-        print("it is computer turn")
+    print("It is", whos_turn, "'s turn")
 
     # рисуем доску
-    print('     1   2   3')
+    print('  ', end='')
+    for i in range(width):
+        print('  ', i + 1, end='')
+    print()
     print('   ' + '-' * (width * 4 + 1))
     for row_number, row in enumerate(board):
         print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
         print('   ' + '-' * (width * 4 + 1))
-    # ход игрока
-    if player_turn == True:
-        print("please,it is player turn")
-        input("where will you put your X?")
 
-    # ход компьютера
-    else:
-        print("my turn, ha-ha-ha")
+    # игрок делает ход
+    while ...:
+        player_coordinates = input("Where will you put your symbol? ")
+        # "1 1"  "2 1" "3 2"
+        x, y = player_coordinates.split()
+        x_int = int(x)
+        y_int = int(y)
+        if board[x_int - 1][y_int - 1] is ' ':
+            board[x_int - 1][y_int - 1] = whos_turn
+            break
+        else:
+            print("This place is full.")
 
+    # проверить, не победил ли этот игрок
 
 #     1   2   3
 #   -------------
