@@ -37,6 +37,7 @@ for turn_number in range(1, max_turns + 1):
         print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
         print('   ' + '-' * (width * 4 + 1))
 
+
     # игрок делает ход
     while ...:
         player_coordinates = input("Where will you put your symbol? ")
@@ -49,8 +50,20 @@ for turn_number in range(1, max_turns + 1):
             break
         else:
             print("This place is full.")
-
+    if board[x_int - 1] == [whos_turn] * width:
+        print(whos_turn,"won!!!")
+        break
     # проверить, не победил ли этот игрок
+    # x_int, y_int
+    # whos_turn
+
+    # проверим ряд x_int
+    #    все ячейки в ряду равны whos_turn
+
+
+    # проверим колонку y_int
+    #    все ячейки в колонке равны whos_turn
+    # проверим диагонали
 
 #     1   2   3
 #   -------------
