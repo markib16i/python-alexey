@@ -50,20 +50,39 @@ for turn_number in range(1, max_turns + 1):
             break
         else:
             print("This place is full.")
-    if board[x_int - 1] == [whos_turn] * width:
-        print(whos_turn,"won!!!")
-        break
+
     # проверить, не победил ли этот игрок
     # x_int, y_int
     # whos_turn
 
+
+    has_won = False
     # проверим ряд x_int
     #    все ячейки в ряду равны whos_turn
+    if board[x_int - 1] == [whos_turn] * width:
+        has_won = True
+    else:
+        # проверим колонку y_int (не работает?)
+        #    все ячейки в колонке равны whos_turn
+        has_won = True
+        for row in board:
+            if row[y_int - 1] != whos_turn:
+                has_won = False
+                break
+        # проверим диагонали (2 варианта)
+        for i in range(height):
+            if board[i][i] != whos_turn :
+                has_won = False
+                break
+
+    # после всех проверок, если флаг поднят, объявим победителя
+    if has_won:
+        print("Player", whos_turn, "has won!")
+        break
 
 
-    # проверим колонку y_int
-    #    все ячейки в колонке равны whos_turn
-    # проверим диагонали
+
+
 
 #     1   2   3
 #   -------------
