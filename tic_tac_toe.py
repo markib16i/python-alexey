@@ -45,35 +45,41 @@ for turn_number in range(1, max_turns + 1):
         x, y = player_coordinates.split()
         x_int = int(x)
         y_int = int(y)
-        if board[x_int - 1][y_int - 1] is ' ':
+        if board[x_int - 1][y_int - 1] == ' ':
             board[x_int - 1][y_int - 1] = whos_turn
             break
         else:
             print("This place is full.")
 
+    has_won = False
+
     # проверить, не победил ли этот игрок
     # x_int, y_int
     # whos_turn
-
-
-    has_won = False
-    # проверим ряд x_int
-    #    все ячейки в ряду равны whos_turn
     if board[x_int - 1] == [whos_turn] * width:
         has_won = True
+
     else:
-        # проверим колонку y_int (не работает?)
-        #    все ячейки в колонке равны whos_turn
         has_won = True
+        # проверяем вертикаль
         for row in board:
             if row[y_int - 1] != whos_turn:
                 has_won = False
                 break
-        # проверим диагонали (2 варианта)
-        for i in range(height):
-            if board[i][i] != whos_turn :
-                has_won = False
-                break
+        if has_won == False:
+            has_won = True
+            # проверяем диагональ
+            for i in range(height):
+                if board[i][i] != whos_turn:
+                    has_won = False
+                    break
+            if has_won == False:
+                has_won = True
+                # проверяем другую диагональ
+                for i in range(height):
+                    if board[i][-i - 1] != whos_turn:
+                        has_won = False
+                        break
 
     # после всех проверок, если флаг поднят, объявим победителя
     if has_won:
@@ -81,14 +87,7 @@ for turn_number in range(1, max_turns + 1):
         break
 
 
+# Домашка:
 
-
-
-#     1   2   3
-#   -------------
-# 1 | X | X | X |
-#   -------------
-# 2 | 0 | 0 | 0 |
-#   -------------
-# 3 | 8 | 8 | 8 |
-#   -------------
+# 1. Печатать финальную позицию по окончании игры.
+# 2. Объявлять ничью, если все клетки заполнены, а победителя нет.
