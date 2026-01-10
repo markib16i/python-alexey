@@ -14,15 +14,20 @@ width = len(board[0])
 height = len(board)
 max_turns = width * height
 
-# рисуем доску
-print('  ', end='')
-for i in range(width):
-    print('  ', i + 1, end='')
-print()
-print('   ' + '-' * (width * 4 + 1))
-for row_number, row in enumerate(board):
-    print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
+# рисование текущего состояния доски
+def draw_board():
+    print("Current state:")
+    print('  ', end='')
+    for i in range(width):
+        print('  ', i + 1, end='')
+    print()
     print('   ' + '-' * (width * 4 + 1))
+    for row_number, row in enumerate(board):
+        print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
+        print('   ' + '-' * (width * 4 + 1))
+
+# рисуем начальное состояние
+draw_board()
 
 # main game loop
 for turn_number in range(1, max_turns + 1):
@@ -83,16 +88,8 @@ for turn_number in range(1, max_turns + 1):
                     if board[i][-i - 1] != whos_turn:
                         has_won = False
                         break
-
     # рисуем доску
-    print('  ', end='')
-    for i in range(width):
-        print('  ', i + 1, end='')
-    print()
-    print('   ' + '-' * (width * 4 + 1))
-    for row_number, row in enumerate(board):
-        print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
-        print('   ' + '-' * (width * 4 + 1))
+    draw_board()
 
     if has_won:
         print("Player", whos_turn, "has won!")
