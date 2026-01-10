@@ -96,7 +96,5 @@ for turn_number in range(1, max_turns + 1):
         break
 
 
-# Домашка:
-
-# 1. Печатать финальную позицию по окончании игры.
-# 2. Объявлять ничью, если все клетки заполнены, а победителя нет.
+if not has_won:
+    print("there is no winners because all places are full")
