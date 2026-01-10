@@ -14,6 +14,16 @@ width = len(board[0])
 height = len(board)
 max_turns = width * height
 
+# рисуем доску
+print('  ', end='')
+for i in range(width):
+    print('  ', i + 1, end='')
+print()
+print('   ' + '-' * (width * 4 + 1))
+for row_number, row in enumerate(board):
+    print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
+    print('   ' + '-' * (width * 4 + 1))
+
 # main game loop
 for turn_number in range(1, max_turns + 1):
     if turn_number % 2 == 1:
@@ -27,22 +37,11 @@ for turn_number in range(1, max_turns + 1):
     # чей ход
     print("It is", whos_turn, "'s turn")
 
-    # рисуем доску
-    print('  ', end='')
-    for i in range(width):
-        print('  ', i + 1, end='')
-    print()
-    print('   ' + '-' * (width * 4 + 1))
-    for row_number, row in enumerate(board):
-        print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
-        print('   ' + '-' * (width * 4 + 1))
-
-
     # игрок делает ход
     while ...:
         player_coordinates = input("Where will you put your symbol? ")
         # "1 1"  "2 1" "3 2"
-        x, y = player_coordinates.split()
+        x,y = player_coordinates.split()
         x_int = int(x)
         y_int = int(y)
         if board[x_int - 1][y_int - 1] == ' ':
@@ -53,9 +52,13 @@ for turn_number in range(1, max_turns + 1):
 
     has_won = False
 
+
     # проверить, не победил ли этот игрок
     # x_int, y_int
     # whos_turn
+
+
+    # после всех проверок, если флаг поднят, объявим победителя
     if board[x_int - 1] == [whos_turn] * width:
         has_won = True
 
@@ -81,7 +84,16 @@ for turn_number in range(1, max_turns + 1):
                         has_won = False
                         break
 
-    # после всех проверок, если флаг поднят, объявим победителя
+    # рисуем доску
+    print('  ', end='')
+    for i in range(width):
+        print('  ', i + 1, end='')
+    print()
+    print('   ' + '-' * (width * 4 + 1))
+    for row_number, row in enumerate(board):
+        print(row_number + 1, ' | ' + ' | '.join(row) + ' |')
+        print('   ' + '-' * (width * 4 + 1))
+
     if has_won:
         print("Player", whos_turn, "has won!")
         break
