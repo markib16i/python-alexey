@@ -7,7 +7,14 @@ board = [
 import random
 
 def random_number():
-    # random.sample(2, 4)
+    # var 1
+    # return random.sample([2, 2, 2, 2, 2, 2, 2, 2, 2, 4], 1)[0]
+
+    # var 2
+    if random.randint(0, 9) == 0:
+        return 4
+    else:
+        return 2
 
 # Домашка
 
