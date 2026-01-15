@@ -1,21 +1,38 @@
+import random
+
+def random_tile():
+    if random.randint(0, 9) == 0:
+        return 4
+    else:
+        return 2
+
+def new_tile(board):
+    # Случайно выбираем местоположение для новой плитки и плитку
+    row_index = random.randint(0, 3)
+    column_index = random.randint(0 ,3)
+    # Домашка: проверить, что место не занято или повторить случайный выбор
+    board[row_index][column_index] = random_tile()
+
+
 board = [
     [None, None, None, None],
     [None, None, None, None],
     [None, None, None, None],
     [None, None, None, None],
 ]
-import random
 
-def random_number():
-    # var 1
-    # return random.sample([2, 2, 2, 2, 2, 2, 2, 2, 2, 4], 1)[0]
+new_tile(board)
+new_tile(board)
 
-    # var 2
-    if random.randint(0, 9) == 0:
-        return 4
-    else:
-        return 2
 
-# Домашка
 
-# Дописать функцию random_number так, чтобы она возвращала либо 2, либо 4 с вероятностью 90% и 10% соответственно.
+# Оформить этот кусочек, как функцию
+# Печатаем всю доску, как есть, ряд за рядом
+for row in board:
+    for cell in row:
+        if cell is None:
+            visual_cell = ' '
+        else:
+            visual_cell = cell
+        print(f"| {visual_cell} ", end='')
+    print("|")
