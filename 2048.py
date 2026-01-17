@@ -7,12 +7,18 @@ def random_tile():
         return 2
 
 def new_tile(board):
-    # Случайно выбираем местоположение для новой плитки и плитку
-    row_index = random.randint(0, 3)
-    column_index = random.randint(0 ,3)
-    # Домашка: проверить, что место не занято или повторить случайный выбор
-    board[row_index][column_index] = random_tile()
+    while True:
+        # Случайно выбираем местоположение для новой плитки и плитку
+        row_index = random.randint(0, 3)
+        column_index = random.randint(0 ,3)
 
+        # if the place is full - repeat
+        if board[row_index][column_index] is not None:
+            continue
+
+        # Домашка: проверить, что место не занято или повторить случайный выбор
+        board[row_index][column_index] = random_tile()
+        break
 
 board = [
     [None, None, None, None],
@@ -23,6 +29,15 @@ board = [
 
 new_tile(board)
 new_tile(board)
+
+
+
+
+
+
+
+
+
 
 
 
