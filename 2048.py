@@ -32,15 +32,16 @@ new_tile(board)
 new_tile(board)
 
 while True:  # Main game loop
-    # ask user - 2 3 asdw
-    user_answer = input("Enter the coordinates and direction: ")
-    x, y, direction = user_answer.split()
-    current_row_index = int(x) - 1
-    current_column_index = int(y) - 1
+    our_question = "Enter the coordinates of the tile you want to push and the direction (w/a/s/d): "
+    player_answer = input(our_question)
+
+    row_number, column_number, direction = player_answer.split()
+    row_index = int(row_number) - 1
+    column_index = int(column_number) - 1
 
     # remember choice
-    new_row_index = current_row_index
-    new_column_index = current_column_index
+    new_row_index =     row_number
+    new_column_index = column_number
 
     # Try to move further - according to user choice
     while True:
