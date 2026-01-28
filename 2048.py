@@ -1,4 +1,6 @@
 import random
+from shutil import move
+
 
 def random_tile():
     if random.randint(0, 9) == 0:
@@ -30,35 +32,50 @@ new_tile(board)
 new_tile(board)
 
 while True:  # Main game loop
-    # 2 3 asdw
+    # ask user - 2 3 asdw
     user_answer = input("Enter the coordinates and direction: ")
     x, y, direction = user_answer.split()
-    x_int = int(x) - 1
-    y_int = int(y) - 1
-    while True:  # Try to move further
+    current_row_index = int(x) - 1
+    current_column_index = int(y) - 1
+
+    # remember choice
+    new_row_index = current_row_index
+    new_column_index = current_column_index
+
+    # Try to move further - according to user choice
+    while True:
+        # save new before move
+        new_before_row_index = new_row_index
+        new_before_column_index = new_column_index
+
+        # update new by move
         match direction:
+            # up
             case "w":
-                x_int -= 1
-            case 'a':
-                y_int -= 1
+                new_row_index -= 1
+            # bottom
             case "s":
-                x_int += 1
+                new_row_index += 1
+            # left
+            case 'a':
+                new_column_index -= 1
+            # right
             case "d":
-                y_int += 1
-        # 1. А НЕ ВЫХОДИМ ЛИ МЫ ЗА ПРЕДЕЛЫ ДОСКИ?
-        if 0 <= x_int <= 3 and 0 <= y_int <= 3:
-            ...
-        else:
-            ...
+                new_column_index += 1
 
-        # 2. А НЕ СТОЛКНУЛИСЬ ЛИ МЫ С ПЛИТКОЙ?
-        if board[x_int][y_int] is not None:
-            ...
-        else:
-            ...
+        # 1. А есть ли тут такой же тайл
+        if board[new_row_index][new_column_index] == board[current_row_index][current_column_index]:
+            board[new_row_index][new_column_index] *= 2
+            break
+
+        # 2. А есть ли тут другой тайл
 
 
-# Совет: переименовать x_int в row_index и y_int в column_index
+        # 3. А НЕ ДОШЛИ ЛИ МЫ ДО КРАЯ
+        if 0 < new_row_index < 4 and 0 < new_column_index < 3:
+            board[new_row_index][new_column_index] = board[current_row_index][current_column_index]
+            board[current_row_index][current_column_index] = None
+            break
 
 
 
