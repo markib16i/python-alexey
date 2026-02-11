@@ -1,16 +1,19 @@
 import random
-from shutil import move
 
 
 def print_board(board):
-    for row in board:
+    print("      1      2      3      4")
+    print("  " + ('-' * 29))
+    for row_index, row in enumerate(board):
+        print(f"{row_index + 1} ", end='')
         for cell in row:
             if cell is None:
-                visual_cell = ' '
+                visual_cell = ' ' * 4
             else:
                 visual_cell = cell
-            print(f"| {visual_cell} ", end='')
+            print(f"| {visual_cell:4} ", end='')
         print("|")
+        print("  " + ('-' * 29))
 
 def random_tile():
     if random.randint(0, 9) == 0:
@@ -22,7 +25,7 @@ def new_tile(board):
     while True:
         # Случайно выбираем местоположение для новой плитки и плитку
         row_index = random.randint(0, 3)
-        column_index = random.randint(0 ,3)
+        column_index = random.randint(0, 3)
 
         # if the place is full - repeat
         if board[row_index][column_index] is not None:
@@ -50,12 +53,7 @@ while True:  # Main game loop
     row_index = int(row_number) - 1
     column_index = int(column_number) - 1
 
-    # # remember choice
-    # new_row_index = row_number
-    # new_column_index = column_number
-
-    # Try to move further - according to user choice
-    while True:
+    while True:  # Moving the tile cell by cell
         # set the next position to the current position
         next_row_index = row_index
         next_column_index = column_index
@@ -75,6 +73,7 @@ while True:  # Main game loop
             case "d":
                 next_column_index += 1
 
+
         # А НЕ ДОШЛИ ЛИ МЫ ДО КРАЯ
         if not (
             0 <= next_row_index <= 3 and
@@ -87,17 +86,25 @@ while True:  # Main game loop
 
         # А есть ли тут такой же тайл
         if destination_tile == tile:
-            destination_tile *= 2
-            tile = None
+            board[next_row_index][next_column_index] *= 2
+            board[row_index][column_index] = None
             break
 
         # А есть ли тут другой тайл
         if destination_tile != None:
             break
 
-
         board[next_row_index][next_column_index] = tile
         board[row_index][column_index] = None
         row_index = next_row_index
         column_index = next_column_index
 
+    new_tile(board)
+
+
+# ДОМАШКА
+
+# Проверять ввод
+# Не давать передвигать пустую клетку
+# Проверять, что доска заполнена перед попыткой поставть новую плитку
+# Проверять победу 2048
