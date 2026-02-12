@@ -47,11 +47,23 @@ new_tile(board)
 while True:  # Main game loop
     print_board(board)
     our_question = "Enter the coordinates of the tile you want to push and the direction (w/a/s/d): "
-    player_answer = input(our_question)
 
-    row_number, column_number, direction = player_answer.split()
-    row_index = int(row_number) - 1
-    column_index = int(column_number) - 1
+    while True:
+        player_answer: str = input(our_question)
+        try:
+            row_number, column_number, direction = player_answer.split()
+            row_index = int(row_number) - 1
+            column_index = int(column_number) - 1
+            if (
+                board[row_index][column_index] == None or
+                direction not in "asdw" or
+                len(direction) != 1
+            ):
+                raise Exception
+        except:
+            print("Please try again!")
+            continue
+        break
 
     while True:  # Moving the tile cell by cell
         # set the next position to the current position
@@ -99,12 +111,21 @@ while True:  # Main game loop
         row_index = next_row_index
         column_index = next_column_index
 
-    new_tile(board)
-
+    is_empty_cell_found = False
+    for row in board:
+        for cell in row:
+            if cell == None:
+                is_empty_cell_found = True
+                break
+        if is_empty_cell_found:
+            break
+    if is_empty_cell_found:
+        new_tile(board)
+    else:
+        print("GAME OVER")
+        break
 
 # ДОМАШКА
 
-# Проверять ввод
-# Не давать передвигать пустую клетку
-# Проверять, что доска заполнена перед попыткой поставть новую плитку
+# Протестировать заполнение доски и проигрыш
 # Проверять победу 2048
