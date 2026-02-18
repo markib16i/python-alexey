@@ -111,21 +111,20 @@ while True:  # Main game loop
         row_index = next_row_index
         column_index = next_column_index
 
+    # Осталось ли свободное место на доске?
     is_empty_cell_found = False
+    is_2048_found = False
     for row in board:
         for cell in row:
             if cell == None:
                 is_empty_cell_found = True
-                break
-        if is_empty_cell_found:
-            break
+            if cell == 2048:
+                is_2048_found = True
     if is_empty_cell_found:
         new_tile(board)
-    else:
-        print("GAME OVER")
+        continue
+    if is_2048_found:
+        print("WELL DONE!!!you have won the game!!!")
         break
-
-# ДОМАШКА
-
-# Протестировать заполнение доски и проигрыш
-# Проверять победу 2048
+    print("GAME OVER")
+    break
