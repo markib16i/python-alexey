@@ -9,9 +9,12 @@ screen = pygame.display.set_mode(DISPLAY_SIZE)
 track = pygame.image.load('track1.png')
 car1 = pygame.image.load('car1.png')
 car2 = pygame.image.load('car2.png')
-
-# Высота 950, ширина 1920
-# Старт 1400, 545
+coordinates = [
+    DISPLAY_SIZE[0] - 1920,
+    DISPLAY_SIZE[1] / 2 - 545
+]
+speed = 0
+acceleration = 5
 
 while True:
     # Очередь событий мы разбираем в начале каждого кадра
@@ -22,19 +25,22 @@ while True:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
-        print('up')
+        coordinates[1] += speed
     if keys[pygame.K_LEFT]:
-        print('left')
+        speed += acceleration
     if keys[pygame.K_DOWN]:
-        print('down')
+        coordinates[1] -= speed
     if keys[pygame.K_RIGHT]:
-        print('right')
-
+        coordinates[0] -= speed
+    coordinates[0] += speed
+    if speed > 0:
+        speed -= acceleration
 
     screen.fill(color=pygame.Color('magenta'))
-    screen.blit(track, (DISPLAY_SIZE[0] - 1920, DISPLAY_SIZE[1] / 2 - 545))
+    screen.blit(track, coordinates)
     screen.blit(car1, (725, 465))
+
     # Рисуем весь кадр
     pygame.display.flip()
     # Задержка между кадрами, чтобы не перегружать процессор, в конце кадра
-    clock.tick(30)
+    clock.tick(0)
