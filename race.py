@@ -1,6 +1,7 @@
 import pygame
 
 DISPLAY_SIZE = (1200, 975)
+FPS = 40
 
 pygame.init()
 
@@ -9,38 +10,55 @@ screen = pygame.display.set_mode(DISPLAY_SIZE)
 track = pygame.image.load('track1.png')
 car1 = pygame.image.load('car1.png')
 car2 = pygame.image.load('car2.png')
-coordinates = [
+
+position = pygame.Vector2(
     DISPLAY_SIZE[0] - 1920,
     DISPLAY_SIZE[1] / 2 - 545
-]
-speed = 0
-acceleration = 5
+)
+velocity = pygame.Vector2(0, 0)
+facing = pygame.Vector2(-1, 0)
+steer_speed = 30
+acceleration_forward = 5
+brake_force = 10
+
 
 while True:
+    dt = clock.tick(FPS) / 1000
+
     # Очередь событий мы разбираем в начале каждого кадра
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
 
+
+    acceleration = pygame.Vector2(0, 0)
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_UP]:
-        coordinates[1] += speed
-    if keys[pygame.K_LEFT]:
-        speed += acceleration
-    if keys[pygame.K_DOWN]:
-        coordinates[1] -= speed
-    if keys[pygame.K_RIGHT]:
-        coordinates[0] -= speed
-    coordinates[0] += speed
-    if speed > 0:
-        speed -= acceleration
+    if keys[pygame.K_LEFT]:  # Acceleration in the direction of facing
+        acceleration += facing * acceleration_forward
+    if keys[pygame.K_RIGHT]:  # Brake
+        acceleration += -facing * brake_force
+
+
+    velocity += acceleration * dt
+    position += -velocity * dt
+
+    # if keys[pygame.K_UP]:
+    #     coordinates[1] += speed
+    # if keys[pygame.K_LEFT]:  # Acceleration in the direction of facing
+    #     speed += acceleration
+    # if keys[pygame.K_DOWN]:
+    #     coordinates[1] -= speed
+    # if keys[pygame.K_RIGHT]:
+    #     coordinates[0] -= speed
+    # coordinates[0] += speed
+    # if speed > 0:
+    #     speed -= acceleration
 
     screen.fill(color=pygame.Color('magenta'))
-    screen.blit(track, coordinates)
+    screen.blit(track, position)
     screen.blit(car1, (725, 465))
 
     # Рисуем весь кадр
     pygame.display.flip()
     # Задержка между кадрами, чтобы не перегружать процессор, в конце кадра
-    clock.tick(0)
