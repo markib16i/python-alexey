@@ -15,11 +15,10 @@ position = pygame.Vector2(
     DISPLAY_SIZE[0] - 1920,
     DISPLAY_SIZE[1] / 2 - 545
 )
-velocity = pygame.Vector2(0, 0)
+velocity = pygame.Vector2()
 facing = pygame.Vector2(-1, 0)
-steer_speed = 30
-acceleration_forward = 5
-brake_force = 10
+acceleration = 100
+brake_force = 300
 
 
 while True:
@@ -32,15 +31,14 @@ while True:
             exit()
 
 
-    acceleration = pygame.Vector2(0, 0)
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:  # Acceleration in the direction of facing
-        acceleration += facing * acceleration_forward
-    if keys[pygame.K_RIGHT]:  # Brake
-        acceleration += -facing * brake_force
+    if keys[pygame.K_a]:  # Acceleration in the direction of facing
+        velocity += facing * acceleration * dt  # TODO: Vector addition
+    if keys[pygame.K_z]:  # Braking till 0
+          velocity -= facing * brake_force * dt
+          if facing.dot(velocity) < 0:  # TODO: Vector dot product
+            velocity = pygame.Vector2()
 
-
-    velocity += acceleration * dt
     position += -velocity * dt
 
     # if keys[pygame.K_UP]:
