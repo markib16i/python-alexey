@@ -19,25 +19,28 @@ velocity = pygame.Vector2()
 facing = pygame.Vector2(-1, 0)
 acceleration = 100
 brake_force = 300
-
+transmission = 1
 
 while True:
     dt = clock.tick(FPS) / 1000
 
     # Очередь событий мы разбираем в начале каждого кадра
     for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_x:
+                transmission *= -1
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-
-
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_a]:  # Acceleration in the direction of facing
-        velocity += facing * acceleration * dt  # TODO: Vector addition
-    if keys[pygame.K_z]:  # Braking till 0
-          velocity -= facing * brake_force * dt
-          if facing.dot(velocity) < 0:  # TODO: Vector dot product
+    if keys[pygame.K_a]:
+        velocity += transmission * facing * acceleration * dt
+    if keys[pygame.K_z]:
+        if velocity.length() > 0:
+            velocity -= velocity.normalize() * brake_force * dt
+        if velocity.length() < brake_force * dt:
             velocity = pygame.Vector2()
+
 
     position += -velocity * dt
 
