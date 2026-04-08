@@ -20,6 +20,7 @@ facing = pygame.Vector2(-1, 0)
 acceleration = 100
 brake_force = 300
 transmission = 1
+rotation_speed = 10
 
 while True:
     dt = clock.tick(FPS) / 1000
@@ -32,31 +33,23 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_a]:
+
+    if keys[pygame.K_LEFT]:
+        facing.rotate_ip(rotation_speed * dt)
+    if keys[pygame.K_RIGHT]:
+        facing.rotate_ip(-rotation_speed * dt)
+    if keys[pygame.K_a]:  # Газ
         velocity += transmission * facing * acceleration * dt
-    if keys[pygame.K_z]:
+    if keys[pygame.K_z]:  # Тормоз
         if velocity.length() > 0:
             velocity -= velocity.normalize() * brake_force * dt
         if velocity.length() < brake_force * dt:
             velocity = pygame.Vector2()
 
-
     position += -velocity * dt
 
-    # if keys[pygame.K_UP]:
-    #     coordinates[1] += speed
-    # if keys[pygame.K_LEFT]:  # Acceleration in the direction of facing
-    #     speed += acceleration
-    # if keys[pygame.K_DOWN]:
-    #     coordinates[1] -= speed
-    # if keys[pygame.K_RIGHT]:
-    #     coordinates[0] -= speed
-    # coordinates[0] += speed
-    # if speed > 0:
-    #     speed -= acceleration
-
-    screen.fill(color=pygame.Color('magenta'))
     screen.blit(track, position)
     screen.blit(car1, (725, 465))
 
